@@ -1,6 +1,81 @@
+import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo.svg";
 
 const Navbar = () => {
+  const navLinks = (
+    <>
+      <li className="mr-2">
+        <NavLink
+          to="/"
+          className={({ isActive, isPending }) =>
+            isPending
+              ? "pending"
+              : isActive
+              ? "bg-custom-color text-white"
+              : " hover:border-custom-color hover:border hover:bg-white"
+          }
+        >
+          Home
+        </NavLink>
+      </li>
+      <li className="mr-2">
+        <NavLink
+          to="/about"
+          className={({ isActive, isPending }) =>
+            isPending
+              ? "pending"
+              : isActive
+              ? "bg-custom-color text-white"
+              : " hover:border-custom-color hover:border hover:bg-white"
+          }
+        >
+          About
+        </NavLink>
+      </li>
+      <li className="mr-2">
+        <NavLink
+          to="/services"
+          className={({ isActive, isPending }) =>
+            isPending
+              ? "pending"
+              : isActive
+              ? "bg-custom-color text-white"
+              : " hover:border-custom-color hover:border hover:bg-white"
+          }
+        >
+          Services
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/blog"
+          className={({ isActive, isPending }) =>
+            isPending
+              ? "pending"
+              : isActive
+              ? "bg-custom-color text-white"
+              : " hover:border-custom-color hover:border hover:bg-white"
+          }
+        >
+          Blog
+        </NavLink>
+      </li>
+      <li className="mr-2">
+        <NavLink
+          to="/contact"
+          className={({ isActive, isPending }) =>
+            isPending
+              ? "text-custom-color"
+              : isActive
+              ? "bg-custom-color text-white"
+              : " hover:border-custom-color hover:border hover:bg-white"
+          }
+        >
+          Contact
+        </NavLink>
+      </li>
+    </>
+  );
   return (
     <div>
       <div className="navbar bg-base-100">
@@ -26,51 +101,17 @@ const Navbar = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
-              <li>
-                <a>Item 1</a>
-              </li>
-              <li>
-                <a>Parent</a>
-                <ul className="p-2">
-                  <li>
-                    <a>Submenu 1</a>
-                  </li>
-                  <li>
-                    <a>Submenu 2</a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a>Item 3</a>
-              </li>
+              {navLinks}
             </ul>
           </div>
           <div>
-            <img src={logo} alt="" />
+            <Link to="/">
+              <img src={logo} alt="" />
+            </Link>
           </div>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            <li>
-              <a>Item 1</a>
-            </li>
-            <li tabIndex={0}>
-              <details>
-                <summary>Parent</summary>
-                <ul className="p-2">
-                  <li>
-                    <a>Submenu 1</a>
-                  </li>
-                  <li>
-                    <a>Submenu 2</a>
-                  </li>
-                </ul>
-              </details>
-            </li>
-            <li>
-              <a>Item 3</a>
-            </li>
-          </ul>
+          <ul className="menu menu-horizontal px-1">{navLinks}</ul>
         </div>
         <div className="navbar-end">
           <a className="btn">Button</a>
