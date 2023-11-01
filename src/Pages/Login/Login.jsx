@@ -3,22 +3,40 @@ import google from "../../assets/images/login/google.png";
 import facebook from "../../assets/images/login/facebook.png";
 import linkedin from "../../assets/images/login/linkedin.png";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const Login = () => {
+  const { userSignIn } = useContext(AuthContext);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(password, email);
+    userSignIn(email, password)
+      .then((result) => {
+        console.log(result.user);
+      })
+      .then((error) => console.log(error));
+  };
+
   return (
-    <div className="hero min-h-screen flex">
+    <div className="hero min-h-screen flex mb-10">
       <div className="w-1/2">
         <LoginImage></LoginImage>
       </div>
       <div className="rounded-md w-1/3 border-2 border-[#D0D0D0]">
         <h2 className="text-4xl font-bold mt-12 text-center">Login</h2>
-        <form className="card-body">
+        <form onSubmit={handleSubmit} className="card-body">
           <div className="form-control">
             <label className="label">
               <span className="label-text">Email</span>
             </label>
             <input
               type="email"
+              name="email"
               placeholder="Your email"
               className="input input-bordered"
               required
@@ -30,6 +48,7 @@ const Login = () => {
             </label>
             <input
               type="password"
+              name="password"
               placeholder="Your password"
               className="input input-bordered"
               required
@@ -52,9 +71,9 @@ const Login = () => {
           </button>
         </div>
         <p className="text-center font-medium mt-8 mb-10">
-          Have an account?
+          Do not have an account?
           <span className="text-custom-color ml-2">
-            <Link>Sign in</Link>
+            <Link to="/signup">Sign Up</Link>
           </span>
         </p>
       </div>
