@@ -26,7 +26,17 @@ const BookService = () => {
       service_id: _id,
       img: img,
     };
-    console.log(booking);
+    fetch("http://localhost:5000/bookings", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(booking),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
   };
 
   return (

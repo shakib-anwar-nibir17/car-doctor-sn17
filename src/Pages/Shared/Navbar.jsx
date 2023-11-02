@@ -1,7 +1,16 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo.svg";
+import { useContext } from "react";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logOut()
+      .then((result) => console.log(result))
+      .catch((error) => console.error(error));
+  };
   const navLinks = (
     <>
       <li className="mr-2">
@@ -60,20 +69,46 @@ const Navbar = () => {
           Blog
         </NavLink>
       </li>
-      <li className="mr-2">
-        <NavLink
-          to="/login"
-          className={({ isActive, isPending }) =>
-            isPending
-              ? "pending"
-              : isActive
-              ? "bg-custom-color text-white"
-              : " hover:border-custom-color hover:border hover:bg-white"
-          }
-        >
-          Login
-        </NavLink>
-      </li>
+      {user?.email ? (
+        <>
+          <li className="mr-2">
+            <NavLink
+              to="/my_booking"
+              className={({ isActive, isPending }) =>
+                isPending
+                  ? "pending"
+                  : isActive
+                  ? "bg-custom-color text-white"
+                  : " hover:border-custom-color hover:border hover:bg-white"
+              }
+            >
+              MyBooking
+            </NavLink>
+          </li>
+          <li className="mr-2">
+            <Link>
+              <button onClick={handleLogOut} className="bg-white">
+                Logout
+              </button>
+            </Link>
+          </li>
+        </>
+      ) : (
+        <li className="mr-2">
+          <NavLink
+            to="/login"
+            className={({ isActive, isPending }) =>
+              isPending
+                ? "pending"
+                : isActive
+                ? "bg-custom-color text-white"
+                : " hover:border-custom-color hover:border hover-bg-white"
+            }
+          >
+            Login
+          </NavLink>
+        </li>
+      )}
     </>
   );
   return (
