@@ -46,7 +46,7 @@ const Navbar = () => {
           Services
         </NavLink>
       </li>
-      <li>
+      <li className="mr-2">
         <NavLink
           to="/blog"
           className={({ isActive, isPending }) =>
@@ -62,23 +62,23 @@ const Navbar = () => {
       </li>
       <li className="mr-2">
         <NavLink
-          to="/contact"
+          to="/login"
           className={({ isActive, isPending }) =>
             isPending
-              ? "text-custom-color"
+              ? "pending"
               : isActive
               ? "bg-custom-color text-white"
               : " hover:border-custom-color hover:border hover:bg-white"
           }
         >
-          Contact
+          Login
         </NavLink>
       </li>
     </>
   );
   return (
     <div>
-      <div className="navbar bg-base-100">
+      <div className="navbar">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
