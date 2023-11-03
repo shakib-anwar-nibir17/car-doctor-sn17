@@ -21,6 +21,7 @@ const BookService = () => {
       name2,
       phone,
       email,
+      price,
       message,
       service: title,
       service_id: _id,
